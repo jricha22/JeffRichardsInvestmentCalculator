@@ -43,25 +43,37 @@ public class InvestmentCalculator {
 
     /**
      * Set periodic payment in dollars
+     * Precondition: payment >= 0
      * @param payment Periodic payment in dollars
      */
     public void setPayment(double payment) {
+        if (payment < 0.0) {
+            throw new IllegalArgumentException("Payment cannot be negative");
+        }
         this.payment = payment;
     }
 
     /**
      * Set periodic percentage rate in decimal (1.000 = 100%)
+     * Precondition: Rate >= 0.0
      * @param rate Rate per period (decimal)
      */
     public void setRate(double rate) {
+        if (rate < 0.0) {
+            throw new IllegalArgumentException("Rate cannot be negative");
+        }
         this.rate = rate;
     }
 
     /**
      * Set number of periods
+     * Precondition: Periods >= 0
      * @param periods Number of periods
      */
     public void setPeriods(int periods) {
+        if (periods < 0) {
+            throw new IllegalArgumentException("Periods cannot be negative");
+        }
         this.periods = periods;
     }
 

@@ -29,7 +29,7 @@ public class WhenCalculateFutureValue {
     }
 
     @Test
-    public void testSetPaymentGetsPayment() throws Exception {
+         public void testSetPaymentGetsPayment() throws Exception {
         InvestmentCalculator my_calc = new InvestmentCalculator();
         my_calc.setPayment(1000.23);
         assertEquals(1000.23, my_calc.getPayment(), 0.001);
@@ -46,6 +46,26 @@ public class WhenCalculateFutureValue {
     public void testSetPeriodGetsPeriod() throws Exception {
         InvestmentCalculator my_calc = new InvestmentCalculator();
         my_calc.setPeriods(9);
+        assertEquals(9, my_calc.getPeriods());
+    }
+
+    @Test(expected=IllegalArgumentException.class)
+    public void testSetPaymentNegativeIsIllegal() throws Exception {
+        InvestmentCalculator my_calc = new InvestmentCalculator();
+        my_calc.setPayment(-1000.23);
+    }
+
+    @Test(expected=IllegalArgumentException.class)
+    public void testSetRateNegativeIsIllegal() throws Exception {
+        InvestmentCalculator my_calc = new InvestmentCalculator();
+        my_calc.setRate(-0.1234);
+        assertEquals(0.1234, my_calc.getRate(), 0.00001);
+    }
+
+    @Test(expected=IllegalArgumentException.class)
+    public void testSetPeriodNegativeIsIllegal() throws Exception {
+        InvestmentCalculator my_calc = new InvestmentCalculator();
+        my_calc.setPeriods(-9);
         assertEquals(9, my_calc.getPeriods());
     }
 
