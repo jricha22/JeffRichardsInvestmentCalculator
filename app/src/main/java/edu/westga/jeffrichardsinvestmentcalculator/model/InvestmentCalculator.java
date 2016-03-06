@@ -17,15 +17,51 @@ public class InvestmentCalculator {
         periods = 0;
     }
 
+    /**
+     * Get number of periods
+     * @return Number of periods
+     */
     public int getPeriods() {
         return periods;
     }
 
+    /**
+     * Get periodice payment in dollare
+     * @return Payment in dollars
+     */
     public double getPayment() {
         return payment;
     }
 
+    /**
+     * Get percentage rate per period as decimal (1 = 100%)
+     * @return Rate per period (decimal)
+     */
     public double getRate() {
         return rate;
+    }
+
+    /**
+     * Set periodic payment in dollars
+     * @param payment Periodic payment in dollars
+     */
+    public void setPayment(double payment) {
+        this.payment = payment;
+    }
+
+    /**
+     * Set periodic percentage rate in decimal (1.000 = 100%)
+     * @param rate Rate per period (decimal)
+     */
+    public void setRate(double rate) {
+        this.rate = rate;
+    }
+
+    /**
+     * Set number of periods
+     * @param periods Number of periods
+     */
+    public void setPeriods(int periods) {
+        this.periods = periods;
     }
 }
