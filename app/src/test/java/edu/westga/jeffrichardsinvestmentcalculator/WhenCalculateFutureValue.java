@@ -48,4 +48,10 @@ public class WhenCalculateFutureValue {
         my_calc.setPeriods(9);
         assertEquals(9, my_calc.getPeriods());
     }
+
+    @Test
+    public void testInitialResultIsZero() throws Exception {
+        InvestmentCalculator my_calc = new InvestmentCalculator();
+        assertEquals(0, my_calc.getResult(), 0.001);
+    }
 }

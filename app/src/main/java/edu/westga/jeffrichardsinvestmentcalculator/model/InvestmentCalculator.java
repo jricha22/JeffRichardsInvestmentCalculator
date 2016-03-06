@@ -64,4 +64,12 @@ public class InvestmentCalculator {
     public void setPeriods(int periods) {
         this.periods = periods;
     }
+
+    /**
+     * Get the calculated future value result
+     * @return Calculated future value
+     */
+    public double getResult() {
+        return 0.0;
+    }
 }
