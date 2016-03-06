@@ -8,24 +8,38 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.EditText;
+import android.widget.TextView;
+
+import org.w3c.dom.Text;
+
+import java.text.NumberFormat;
+
+import edu.westga.jeffrichardsinvestmentcalculator.model.InvestmentCalculator;
 
 public class MainActivity extends AppCompatActivity {
+
+    private InvestmentCalculator calculator;
+    private EditText paymentText;
+    private EditText rateText;
+    private EditText periodText;
+    private TextView resultLabel;
+    private TextView messageLabel;
+    private NumberFormat formatter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+        this.paymentText = (EditText) findViewById(R.id.txtPayment);
+        this.rateText = (EditText) findViewById(R.id.txtRate);
+        this.periodText = (EditText) findViewById(R.id.txtPeriods);
+        this.resultLabel = (TextView) findViewById(R.id.lblResult);
+        this.messageLabel = (TextView) findViewById(R.id.lblMessage);
+        this.calculator = new InvestmentCalculator();
+        this.formatter = NumberFormat.getCurrencyInstance();
+        this.initializeValues();
     }
 
     @Override
@@ -48,5 +62,13 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void initializeValues() {
+        this.paymentText.setText(String.format("%.2f", calculator.getPayment()));
+        this.rateText.setText(String.format("%.3f", calculator.getRate()));
+        this.periodText.setText(String.format("%d", calculator.getPeriods()));
+        this.resultLabel.setText(formatter.format(calculator.getResult()));
+        this.messageLabel.setText("");
     }
 }

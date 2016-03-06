@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">JeffRichardsInvestmentCalculator</string>
     <string name="action_settings">Settings</string>
+    <string name="payment">Payment/Cash Flow:</string>
+    <string name="rate">Rate per Period(%):</string>
+    <string name="periods"># of Periods:</string>
+    <string name="value">Projected Value:</string>
 </resources>
