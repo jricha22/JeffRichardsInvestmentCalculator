@@ -54,4 +54,13 @@ public class WhenCalculateFutureValue {
         InvestmentCalculator my_calc = new InvestmentCalculator();
         assertEquals(0, my_calc.getResult(), 0.001);
     }
+
+    @Test
+    public void testInvest100At10PercentFor10PeriodsIs1593_74() throws Exception {
+        InvestmentCalculator my_calc = new InvestmentCalculator();
+        my_calc.setPeriods(10);
+        my_calc.setRate(0.1);
+        my_calc.setPayment(100.0);
+        assertEquals(1593.74, my_calc.getResult(), 0.001);
+    }
 }

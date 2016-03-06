@@ -66,10 +66,15 @@ public class InvestmentCalculator {
     }
 
     /**
-     * Get the calculated future value result
+     * Get the calculated future value result, rounded down to nearest cent
      * @return Calculated future value
      */
     public double getResult() {
-        return 0.0;
+        if (this.rate == 0.0) {
+            return 0.0;
+        }
+        double result = this.payment * ((Math.pow((1.0 + this.rate), this.periods) - 1.0) / rate);
+        int result_cents = (int)(result * 100);
+        return result_cents / 100.0;
     }
 }
