@@ -5,9 +5,11 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -40,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
         this.calculator = new InvestmentCalculator();
         this.formatter = NumberFormat.getCurrencyInstance();
         this.initializeValues();
+        this.setEventHandlers();
     }
 
     @Override
@@ -70,5 +73,60 @@ public class MainActivity extends AppCompatActivity {
         this.periodText.setText(String.format("%d", calculator.getPeriods()));
         this.resultLabel.setText(formatter.format(calculator.getResult()));
         this.messageLabel.setText("");
+    }
+
+    private void setEventHandlers() {
+        this.paymentText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    MainActivity.this.onPaymentChange();
+                }
+            }
+        });
+        this.rateText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    MainActivity.this.onRateChange();
+                }
+            }
+        });
+        this.periodText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    MainActivity.this.onPeriodChange();
+                }
+            }
+        });
+
+        this.periodText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_DONE) {
+                    //Clear focus here from edittext
+                    MainActivity.this.onPeriodChange();
+                }
+                return false;
+            }
+        });
+    }
+
+    private void onPaymentChange() {
+        this.calculator.setPayment(Double.parseDouble(this.paymentText.getText().toString()));
+        this.paymentText.setText(String.format("%.2f", this.calculator.getPayment()));
+        this.resultLabel.setText(formatter.format(calculator.getResult()));
+    }
+
+    private void onRateChange() {
+        this.calculator.setRate(Double.parseDouble(this.rateText.getText().toString()) / 100.0);
+        this.rateText.setText(String.format("%.3f", this.calculator.getRate() * 100.0));
+        this.resultLabel.setText(formatter.format(calculator.getResult()));
+    }
+
+    private void onPeriodChange() {
+        this.calculator.setPeriods(Integer.parseInt(this.periodText.getText().toString()));
+        this.resultLabel.setText(formatter.format(calculator.getResult()));
     }
 }
