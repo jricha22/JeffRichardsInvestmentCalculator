@@ -86,7 +86,7 @@ public class InvestmentCalculator {
             return 0.0;
         }
         double result = this.payment * ((Math.pow((1.0 + this.rate), this.periods) - 1.0) / rate);
-        int result_cents = (int)(result * 100);
+        int result_cents = (int)(result * 100 + 0.5);
         return result_cents / 100.0;
     }
 }

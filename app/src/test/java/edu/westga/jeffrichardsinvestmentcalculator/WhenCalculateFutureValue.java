@@ -110,4 +110,13 @@ public class WhenCalculateFutureValue {
         my_calc.setPayment(100.0);
         assertEquals(1593.74, my_calc.getResult(), 0.001);
     }
+
+    @Test
+    public void testInvest1At3PercentFor5PeriodsIs5_31() throws Exception {
+        InvestmentCalculator my_calc = new InvestmentCalculator();
+        my_calc.setPeriods(5);
+        my_calc.setRate(0.03);
+        my_calc.setPayment(1.0);
+        assertEquals(5.31, my_calc.getResult(), 0.001);
+    }
 }
