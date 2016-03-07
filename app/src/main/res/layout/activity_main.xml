@@ -26,7 +26,6 @@
                 android:inputType="numberDecimal"
                 android:ems="10"
                 android:id="@+id/txtPayment"
-                android:numeric="decimal"
                 android:focusable="true"
                 android:focusableInTouchMode="true" />
         </TableRow>
