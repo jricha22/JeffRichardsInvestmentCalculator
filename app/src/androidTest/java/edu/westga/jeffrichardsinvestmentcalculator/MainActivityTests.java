@@ -1,5 +1,6 @@
 package edu.westga.jeffrichardsinvestmentcalculator;
 
+import android.os.SystemClock;
 import android.test.ActivityInstrumentationTestCase2;
 import android.view.KeyEvent;
 import android.view.inputmethod.EditorInfo;
@@ -31,12 +32,14 @@ public class MainActivityTests extends ActivityInstrumentationTestCase2<MainActi
             }
         });
         getInstrumentation().waitForIdleSync();
+        SystemClock.sleep(500);
         // Wow this framework is horrible...  Have to send keypad right commands and keypad backspace
         // to clear existing text?  Why are all Java related frameworks so dang primitive?
         for (int x = 0; x < 20; x++) {
             getInstrumentation().sendCharacterSync(KeyEvent.KEYCODE_DPAD_RIGHT);
             getInstrumentation().sendCharacterSync(KeyEvent.KEYCODE_DEL);
         }
+        SystemClock.sleep(500);
         getInstrumentation().sendStringSync(value);
     }
 
@@ -71,5 +74,23 @@ public class MainActivityTests extends ActivityInstrumentationTestCase2<MainActi
         TextView resultText = (TextView) activity.findViewById(R.id.lblResult);
         String foo = resultText.getText().toString();
         assertEquals("$1,419.20", resultText.getText().toString());
+    }
+
+    public void testSetPaymentAndRateRoundedAndPeriod() {
+        MainActivity activity = getActivity();
+        this.setAnEditText(R.id.txtPayment, "100.0");
+        this.setAnEditText(R.id.txtRate, "1.23456789");
+        this.setAnEditText(R.id.txtPeriods, "20");
+        final EditText periodsEdit = (EditText) activity.findViewById(R.id.txtPeriods);
+        getInstrumentation().runOnMainSync(new Runnable() {
+            @Override
+            public void run() {
+                periodsEdit.onEditorAction(EditorInfo.IME_ACTION_DONE);
+            }
+        });
+        getInstrumentation().waitForIdleSync();
+        TextView resultText = (TextView) activity.findViewById(R.id.lblResult);
+        String foo = resultText.getText().toString();
+        assertEquals("$2,252.99", resultText.getText().toString());
     }
 }

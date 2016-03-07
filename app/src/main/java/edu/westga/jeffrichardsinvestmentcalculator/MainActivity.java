@@ -120,7 +120,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void onRateChange() {
-        this.calculator.setRate(Double.parseDouble(this.rateText.getText().toString()) / 100.0);
+        // Truncate to 3 digits precision
+        Double rate = Double.parseDouble(this.rateText.getText().toString());
+        int int_rate = (int) (rate * 1000.0 + 0.5);
+        this.calculator.setRate(int_rate / 100000.0);
         this.rateText.setText(String.format("%.3f", this.calculator.getRate() * 100.0));
         this.resultLabel.setText(formatter.format(calculator.getResult()));
     }
