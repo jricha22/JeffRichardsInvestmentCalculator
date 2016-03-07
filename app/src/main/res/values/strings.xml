@@ -5,4 +5,7 @@
     <string name="rate">Rate per Period(%):</string>
     <string name="periods"># of Periods:</string>
     <string name="value">Projected Value:</string>
+    <string name="invalidPaymnet">Invalid Payment!</string>
+    <string name="invalidRate">Invalid Rate!</string>
+    <string name="invalidPeriod">Invalid Period!</string>
 </resources>

@@ -9,6 +9,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -114,22 +115,46 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void onPaymentChange() {
-        this.calculator.setPayment(Double.parseDouble(this.paymentText.getText().toString()));
+        try {
+            this.calculator.setPayment(Double.parseDouble(this.paymentText.getText().toString()));
+        }
+        catch (NumberFormatException err) {
+            this.messageLabel.setText(R.string.invalidPaymnet);
+            this.paymentText.setText(String.format("%.2f", this.calculator.getPayment()));
+            return;
+        }
         this.paymentText.setText(String.format("%.2f", this.calculator.getPayment()));
         this.resultLabel.setText(formatter.format(calculator.getResult()));
+        this.messageLabel.setText("");
     }
 
     private void onRateChange() {
-        // Truncate to 3 digits precision
-        Double rate = Double.parseDouble(this.rateText.getText().toString());
-        int int_rate = (int) (rate * 1000.0 + 0.5);
-        this.calculator.setRate(int_rate / 100000.0);
+        try {
+            // Truncate to 3 digits precision
+            Double rate = Double.parseDouble(this.rateText.getText().toString());
+            int int_rate = (int) (rate * 1000.0 + 0.5);
+            this.calculator.setRate(int_rate / 100000.0);
+        }
+        catch (NumberFormatException err) {
+            this.messageLabel.setText(R.string.invalidRate);
+            this.rateText.setText(String.format("%.3f", this.calculator.getRate()));
+            return;
+        }
         this.rateText.setText(String.format("%.3f", this.calculator.getRate() * 100.0));
         this.resultLabel.setText(formatter.format(calculator.getResult()));
+        this.messageLabel.setText("");
     }
 
     private void onPeriodChange() {
-        this.calculator.setPeriods(Integer.parseInt(this.periodText.getText().toString()));
+        try {
+            this.calculator.setPeriods(Integer.parseInt(this.periodText.getText().toString()));
+        }
+        catch (NumberFormatException err) {
+            this.messageLabel.setText(R.string.invalidPeriod);
+            this.periodText.setText(String.format("%d", this.calculator.getPeriods()));
+            return;
+        }
         this.resultLabel.setText(formatter.format(calculator.getResult()));
+        this.messageLabel.setText("");
     }
 }

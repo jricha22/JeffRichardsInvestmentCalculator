@@ -27,7 +27,8 @@
                 android:ems="10"
                 android:id="@+id/txtPayment"
                 android:numeric="decimal"
-                android:focusable="true" />
+                android:focusable="true"
+                android:focusableInTouchMode="true" />
         </TableRow>
 
         <TableRow
@@ -47,7 +48,8 @@
                 android:inputType="numberDecimal"
                 android:ems="10"
                 android:id="@+id/txtRate"
-                android:focusable="true" />
+                android:focusable="true"
+                android:focusableInTouchMode="true" />
         </TableRow>
 
         <TableRow
@@ -67,7 +69,8 @@
                 android:inputType="number"
                 android:ems="10"
                 android:id="@+id/txtPeriods"
-                android:focusable="true" />
+                android:focusable="true"
+                android:focusableInTouchMode="true" />
         </TableRow>
 
         <TableRow
